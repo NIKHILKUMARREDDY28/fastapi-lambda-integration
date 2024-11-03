@@ -1,3 +1,5 @@
+import os
+
 from fastapi import FastAPI
 from mangum import Mangum
 
@@ -14,6 +16,6 @@ def read_root():
 
 
 if __name__ == "__main__":
+    PORT = int(os.environ.get("PORT", 8000))
     import uvicorn
-
-    uvicorn.run(app)
+    uvicorn.run(app, host="0.0.0.0", port=PORT)
