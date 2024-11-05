@@ -28,7 +28,7 @@ docker push 767397958880.dkr.ecr.ap-south-1.amazonaws.com/fastapi-poetry-lambda:
 
 # Step 7: Run a new Docker container with the specified environment variables and port mappings
 echo "\n\n ===== Run docker for ai-core-services ==== "
-docker run -v ~/.aws:/root/.aws -e AI_ENV=dev -e PORT=8001 -e PYTHONUNBUFFERED=0 -d -p 5000:5000 -p 5005:5005 -p 6001:6001 -p 8000:8000 -p 11434:11434 --name fastapi-poetry-lambda nikhil/fastapi-lambda:latest
+docker run -v ~/.aws:/root/.aws -e AI_ENV=dev -e PORT=8001 -e PYTHONUNBUFFERED=0 -d -p 5000:5000 -p 5005:5005 -p 6001:6001 -p 8000:8000 -p 11434:11434 --name fastapi-poetry-lambda fastapi-poetry-lambda:latest
 
 # Step 8: Wait for 5 seconds
 echo "\n\n === Sleeping for 5 sec(s) ==="
