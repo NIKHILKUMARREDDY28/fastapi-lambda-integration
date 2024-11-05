@@ -12,6 +12,13 @@ git pull origin master
 echo "===== Stop current container ====="
 docker stop fastapi-poetry-lambda || true && docker rm fastapi-poetry-lambda || true
 
+# Step 5: Authenticate Docker to ECR
+echo "\n\n === Authenticating Docker to ECR ==="
+aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 767397958880.dkr.ecr.ap-south-1.amazonaws.com
+
+
+
+
 # Step 3: Build a new Docker image
 echo "\n\n === Building Docker Image ==="
 docker build -t fastapi-poetry-lambda .
@@ -19,9 +26,7 @@ docker build -t fastapi-poetry-lambda .
 # Step 4: Tag the Docker image for ECR
 echo "\n\n === Tagging Docker Image for ECR ==="
 docker tag fastapi-poetry-lambda:latest 767397958880.dkr.ecr.ap-south-1.amazonaws.com/fastapi-poetry-lambda:latest
-# Step 5: Authenticate Docker to ECR
-echo "\n\n === Authenticating Docker to ECR ==="
-aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 767397958880.dkr.ecr.ap-south-1.amazonaws.com
+
 # Step 6: Push the Docker image to ECR
 echo "\n\n === Pushing Docker Image to ECR ==="
 docker push 767397958880.dkr.ecr.ap-south-1.amazonaws.com/fastapi-poetry-lambda:latest
